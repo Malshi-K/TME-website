@@ -1,11 +1,10 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
 const testimonials = [
   {
@@ -28,24 +27,20 @@ const TestimonialCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === testimonials.length - 1 ? 0 : prev + 1
-    );
+    setCurrentSlide((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === 0 ? testimonials.length - 1 : prev - 1
-    );
+    setCurrentSlide((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
   };
 
   return (
-    <section className="py-16 px-4 bg-white overflow-hidden">
+    <section className="py-8 sm:py-12 lg:py-16 px-4 bg-white overflow-hidden">
       <div className="container mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
           {/* Left Side - Image */}
-          <div className="relative">
-            <div className="relative w-full h-[500px] rounded-lg overflow-hidden">
+          <div className="relative order-2 lg:order-1">
+            <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[500px] rounded-lg overflow-hidden shadow-lg">
               <Image
                 src="/images/testimonials-bg.jpg"
                 alt="Passport and family"
@@ -57,84 +52,92 @@ const TestimonialCarousel = () => {
           </div>
 
           {/* Right Side - Testimonials */}
-          <div className="relative">
+          <div className="relative order-1 lg:order-2">
             {/* Header */}
-            <div className="mb-8">
-              <p className="text-customRed font-medium mb-2">| Our Client Review |</p>
-              <h2 className="text-3xl md:text-4xl font-playfair font-bold text-customGray">
+            <div className="mb-6 sm:mb-8 text-center lg:text-left">
+              <p className="text-red-500 font-medium mb-2 text-sm sm:text-base">
+                | Our Client Review |
+              </p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-gray-800">
                 What Our Clients Say About TME
               </h2>
             </div>
 
             {/* Testimonial Cards */}
-            <div className="relative overflow-hidden">
-              <div className="w-full">
-                <Card key={testimonials[currentSlide].id} className="bg-white shadow-lg rounded-lg">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4 mb-4">
-                      <Avatar className="h-16 w-16 border-2 border-customRed">
-                        <AvatarImage
-                          src={testimonials[currentSlide].avatar}
-                          alt={testimonials[currentSlide].name}
-                        />
-                      </Avatar>
-                      <div>
-                        <h3 className="text-xl font-bold text-customGray">
-                          {testimonials[currentSlide].name}
-                        </h3>
+            <div className="relative">
+              <Card className="bg-white shadow-lg rounded-lg">
+                <CardContent className="p-4 sm:p-6">
+                  <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-4">
+                    <Avatar className="h-16 w-16 border-2 border-red-500 shrink-0">
+                      <AvatarImage
+                        src={testimonials[currentSlide].avatar}
+                        alt={testimonials[currentSlide].name}
+                      />
+                    </Avatar>
+                    <div className="text-center sm:text-left">
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-800">
+                        {testimonials[currentSlide].name}
+                      </h3>
+                      {/* Star Rating */}
+                      <div className="flex justify-center sm:justify-start gap-1 mt-2">
+                        {[...Array(testimonials[currentSlide].rating)].map((_, index) => (
+                          <Star
+                            key={index}
+                            className="w-4 h-4 sm:w-5 sm:h-5 fill-red-500 text-red-500"
+                          />
+                        ))}
                       </div>
                     </div>
+                  </div>
 
-                    {/* Star Rating */}
-                    <div className="flex gap-1 mb-4">
-                      {[...Array(testimonials[currentSlide].rating)].map((_, index) => (
-                        <Star
-                          key={index}
-                          className="w-5 h-5 fill-customRed text-customRed"
-                        />
-                      ))}
-                    </div>
-
-                    {/* Testimonial Content */}
-                    <p className="text-gray-700 leading-relaxed">
+                  {/* Testimonial Content */}
+                  <div className="relative">
+                    <p className="text-gray-700 text-sm sm:text-base leading-relaxed max-h-[200px] sm:max-h-[250px] overflow-y-auto pr-2">
                       {testimonials[currentSlide].content}
                     </p>
-                  </CardContent>
-                </Card>
+                    {/* Fade effect for overflow */}
+                    <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent"></div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Navigation Controls */}
+            <div className="mt-6 space-y-4">
+              {/* Navigation Buttons */}
+              <div className="flex justify-center gap-4">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="w-10 h-10 rounded-full border-2 border-red-500 hover:bg-red-50"
+                  onClick={prevSlide}
+                >
+                  <ChevronLeft className="h-4 w-4 text-red-500" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="w-10 h-10 rounded-full border-2 border-red-500 hover:bg-red-50"
+                  onClick={nextSlide}
+                >
+                  <ChevronRight className="h-4 w-4 text-red-500" />
+                </Button>
               </div>
-            </div>
 
-            {/* Navigation Buttons */}
-            <div className="flex justify-center gap-4 mt-6">
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full border-2 border-customRed hover:bg-red-50"
-                onClick={prevSlide}
-              >
-                <ChevronLeft className="h-4 w-4 text-customRed" />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full border-2 border-customRed hover:bg-red-50"
-                onClick={nextSlide}
-              >
-                <ChevronRight className="h-4 w-4 text-customRed" />
-              </Button>
-            </div>
-
-            {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-4">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-2 h-2 rounded-full ${
-                    currentSlide === index ? "bg-customRed" : "bg-gray-300"
-                  }`}
-                  onClick={() => setCurrentSlide(index)}
-                />
-              ))}
+              {/* Dots Indicator */}
+              <div className="flex justify-center gap-3">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      currentSlide === index 
+                        ? "w-4 bg-red-500" 
+                        : "bg-gray-300 hover:bg-gray-400"
+                    }`}
+                    onClick={() => setCurrentSlide(index)}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
-import React from 'react'
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+// GradientButtonPrimary.js
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 const GradientButtonPrimary = ({
   children,
@@ -16,10 +17,12 @@ const GradientButtonPrimary = ({
         "hover:from-red-600 hover:to-gray-600",
         "text-white",
         "uppercase tracking-wider font-medium",
-        "transition-all duration-200",
+        "transition-all duration-300",
         "rounded-full",
-        "px-8 py-3",
+        "text-sm sm:text-base",
+        "px-6 sm:px-8 py-2.5 sm:py-3",
         "shadow-lg hover:shadow-xl",
+        "active:scale-95",
         className
       )}
       variant={variant}
@@ -28,7 +31,7 @@ const GradientButtonPrimary = ({
     >
       {children}
     </Button>
-  )
-}
+  );
+};
 
 export default GradientButtonPrimary;
