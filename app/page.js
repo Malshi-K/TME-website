@@ -1,9 +1,9 @@
-import AboutSection from "@/components/AboutSection";
-import BlogSection from "@/components/BlogSection";
-import ExploreSection from "@/components/ExploreSection";
-import Hero from "@/components/Hero";
-import ImmigrationServices from "@/components/ImmigrationServices";
-import TestimonialsSection from "@/components/TestimonialsSection";
+import AboutSection from "@/components/home/AboutSection";
+import BlogSection from "@/components/home/BlogSection";
+import ExploreSection from "@/components/home/ExploreSection";
+import Hero from "@/components/home/Hero";
+import ImmigrationServices from "@/components/home/ImmigrationServices";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
 
 export default function Home() {
   return (
