@@ -13,10 +13,10 @@ import {
   BookOpen,
   Building,
   Wallet,
-  Wheat, // For Horticulture
-  Ship, // For Foreign Crew
-  Church, // For Religious Worker
-  Trophy, // For Work to Residence
+  Wheat, 
+  Ship, 
+  Church, 
+  Trophy, 
 } from "lucide-react";
 import Link from "next/link";
 
