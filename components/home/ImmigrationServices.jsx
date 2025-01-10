@@ -105,7 +105,7 @@ const ImmigrationServices = () => {
               >
                 <Card className="bg-transparent border-none group transition-transform duration-300 hover:scale-105">
                   <CardHeader className="space-y-4">
-                    <div className="transition-transform duration-300 group-hover:scale-110">
+                    <div className="transition-transform duration-300">
                       {service.Icon}
                     </div>
                     <div className="relative">

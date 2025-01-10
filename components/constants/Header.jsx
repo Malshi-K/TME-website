@@ -10,8 +10,8 @@ import {
   Facebook,
   Linkedin,
 } from "lucide-react";
-import GradientButton from "./GradientButton";
 import Link from "next/link";
+import BorderButton2 from "./BorderButton2";
 
 const Header = () => {
   const [isVisaOptionsOpen, setVisaOptionsOpen] = useState(false);
@@ -76,7 +76,7 @@ const Header = () => {
           <div
             className="absolute right-0 top-0 bottom-0 w-[400px] bg-customGray"
             style={{
-              clipPath: "polygon(10% 0, 100% 0, 100% 100%, 0% 100%)",
+              clipPath: "polygon(5% 0, 100% 0, 100% 100%, 0% 100%)",
             }}
           ></div>
 
@@ -263,9 +263,9 @@ const Header = () => {
 
               {/* Contact Us Button - Desktop */}
               <Link href="/contact-us">
-                <GradientButton className="hidden lg:block">
+                <BorderButton2 className="hidden lg:block">
                   Contact Us
-                </GradientButton>
+                </BorderButton2>
               </Link>
             </div>
 

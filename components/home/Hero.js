@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Plane } from "lucide-react";
 import GradientButtonPrimary from "@/components/constants/GradientButtonPrimary";
+import GradientButton from "../constants/BorderButton";
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -89,7 +90,7 @@ const Hero = () => {
       <div className="relative h-full flex flex-col justify-center">
         <div className="container mx-auto px-4 py-12 md:py-16 lg:py-24">
           {/* Category Tag */}
-          <div className="inline-block bg-gray-800/30 backdrop-blur-sm text-white px-4 sm:px-6 py-1 sm:py-2 mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base">
+          <div className="inline-block bg-customGray backdrop-blur-sm text-white px-4 sm:px-6 py-1 sm:py-2 mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base">
             Immigration Services Provider
           </div>
 
@@ -100,9 +101,9 @@ const Hero = () => {
             </h1>
 
             {/* CTA Button */}
-            <GradientButtonPrimary className="font-bold text-md">
+            <GradientButton className="font-bold text-md">
             Visa Options
-          </GradientButtonPrimary>
+          </GradientButton>
           </div>
         </div>
       </div>
