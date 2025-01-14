@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function VisaDescription({ description }) {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="bg-white rounded-lg shadow-lg">
+      <div className="bg-white">
         <div className="grid md:grid-cols-2 items-center gap-8 p-8">
           {/* Left side - Image Container */}
           <div className="flex justify-center items-center">
