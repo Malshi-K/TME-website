@@ -9,6 +9,7 @@ import {
   Twitter,
   Facebook,
   Linkedin,
+  ChevronDown,
 } from "lucide-react";
 import Link from "next/link";
 import BorderButton2 from "./BorderButton2";
@@ -29,13 +30,8 @@ const Header = () => {
       }
     };
 
-    // Add scroll event listener
     window.addEventListener("scroll", handleScroll);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Dropdown content
@@ -59,22 +55,36 @@ const Header = () => {
     "Visitor Visa Form (Secondary Applicant – Dependant Child)",
   ];
 
+  // Navigation Links Component
+  const NavLink = ({ href, children, isActive }) => (
+    <a
+      href={href}
+      className={`group relative py-2 ${
+        isActive ? "text-red-600" : "text-gray-600"
+      } hover:text-red-500 font-bold text-md uppercase tracking-wider transition-colors duration-200`}
+    >
+      <span>{children}</span>
+      <span className="absolute top-0 left-0 w-full h-0.5 bg-red-500 transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
+    </a>
+  );
+
   return (
     <>
-      <div className="h-[144px]" />
+      {/* Responsive top spacing */}
+      <div className="h-[100px] md:h-[144px]" />
+
       <header
         className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled ? "shadow-xl" : ""
         }`}
       >
-        {/* Top Bar with Shaped Background */}
-        <div className="relative h-11">
+        <div className="relative h-11 hidden md:block">
           {/* Light Background */}
           <div className="absolute inset-0 bg-[#F8F3F0]"></div>
 
           {/* Dark Background with Shape */}
           <div
-            className="absolute right-0 top-0 bottom-0 w-[400px] bg-customGray"
+            className="absolute right-0 top-0 bottom-0 w-[200px] bg-customGray"
             style={{
               clipPath: "polygon(5% 0, 100% 0, 100% 100%, 0% 100%)",
             }}
@@ -85,7 +95,7 @@ const Header = () => {
             <div className="container mx-auto px-4 h-full">
               <div className="flex justify-between items-center h-full">
                 {/* Left Side */}
-                <div className="hidden md:flex items-center space-x-8">
+                <div className="flex items-center space-x-8">
                   <div className="flex items-center space-x-2">
                     <Mail className="h-4 w-4 text-red-500" />
                     <a
@@ -111,21 +121,6 @@ const Header = () => {
 
                 {/* Right Side */}
                 <div className="flex items-center space-x-6">
-                  <div className="hidden md:flex items-center space-x-4">
-                    <Link
-                      href="/faqs"
-                      className="text-sm text-white hover:text-gray-200 font-medium"
-                    >
-                      FAQ's
-                    </Link>
-                    <span className="text-gray-400">/</span>
-                    <Link
-                      href="/support"
-                      className="text-sm text-white hover:text-gray-200 font-medium"
-                    >
-                      Support
-                    </Link>
-                  </div>
                   <div className="flex items-center space-x-3">
                     <a href="#" className="text-white hover:text-gray-200">
                       <Twitter className="h-4 w-4" />
@@ -143,22 +138,24 @@ const Header = () => {
           </div>
         </div>
 
-        <nav className="bg-white py-6">
+        {/* Main Navigation */}
+        <nav className="bg-white py-4 md:py-6">
           <div className="container mx-auto px-4">
             <div className="flex justify-between items-center">
-              {/* Logo */}
+              {/* Logo - Responsive sizing */}
               <div className="flex items-center">
                 <img
                   src="/images/logo.jpg"
                   alt="TME Logo"
-                  className="h-16 w-auto object-contain"
+                  className="h-12 md:h-16 w-auto object-contain"
                 />
               </div>
 
               {/* Mobile Menu Button */}
               <button
-                className="lg:hidden p-2"
+                className="lg:hidden p-2 hover:bg-gray-100 rounded-md transition-colors duration-200"
                 onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? (
                   <X className="h-6 w-6 text-gray-600" />
@@ -168,22 +165,11 @@ const Header = () => {
               </button>
 
               {/* Desktop Navigation */}
-              <div className="hidden lg:flex items-center space-x-8">
-                <a
-                  href="/"
-                  className="group relative py-2 text-red-600 hover:text-red-500 font-bold text-md uppercase tracking-wider"
-                >
-                  <span>HOME</span>
-                  <span className="absolute top-0 left-0 w-full h-0.5 bg-red-500 transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
-                </a>
-
-                <a
-                  href="/about-us"
-                  className="group relative py-2 text-gray-600 hover:text-red-500 font-bold text-md uppercase tracking-wider"
-                >
-                  <span>ABOUT US</span>
-                  <span className="absolute top-0 left-0 w-full h-0.5 bg-red-500 transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
-                </a>
+              <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+                <NavLink href="/" isActive={true}>
+                  HOME
+                </NavLink>
+                <NavLink href="/about-us">ABOUT US</NavLink>
 
                 {/* Desktop Dropdowns */}
                 <div
@@ -191,22 +177,19 @@ const Header = () => {
                   onMouseEnter={() => setVisaOptionsOpen(true)}
                   onMouseLeave={() => setVisaOptionsOpen(false)}
                 >
-                  <a
-                    href="/visa-options"
-                    className="group relative py-2 text-gray-600 hover:text-red-500 font-bold text-md uppercase tracking-wider"
-                  >
+                  <button className="flex items-center space-x-1 group relative py-2 text-gray-600 hover:text-red-500 font-bold text-md uppercase tracking-wider">
                     <span>VISA OPTIONS</span>
-                    <span className="absolute top-0 left-0 w-full h-0.5 bg-red-500 transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
-                  </a>
+                    <ChevronDown className="h-4 w-4 transition-transform group-hover:rotate-180" />
+                  </button>
                   {isVisaOptionsOpen && (
-                    <div className="absolute top-full left-0 w-48 bg-white shadow-lg py-2 z-50">
+                    <div className="absolute top-full left-0 w-56 bg-white shadow-lg py-2 z-50 rounded-md">
                       {visaOptions.map((option, index) => (
                         <a
                           key={index}
                           href={`/visa-options/${option
                             .toLowerCase()
                             .replace(/\s+/g, "-")}`}
-                          className="block px-4 py-2 text-sm text-gray-600 hover:text-red-500 hover:bg-gray-50"
+                          className="block px-4 py-2 text-sm text-gray-600 hover:text-red-500 hover:bg-gray-50 transition-colors duration-200"
                         >
                           {option}
                         </a>
@@ -244,118 +227,93 @@ const Header = () => {
                   )}
                 </div>
 
-                <a
-                  href="/service-fees"
-                  className="group relative py-2 text-gray-600 hover:text-red-500 font-bold text-md uppercase tracking-wider"
-                >
-                  <span>SERVICE FEES</span>
-                  <span className="absolute top-0 left-0 w-full h-0.5 bg-red-500 transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
-                </a>
+                <NavLink href="/service-fees">SERVICE FEES</NavLink>
+                <NavLink href="/news">NEWS</NavLink>
 
-                <a
-                  href="/news"
-                  className="group relative py-2 text-gray-600 hover:text-red-500 font-bold text-md uppercase tracking-wider"
-                >
-                  <span>NEWS</span>
-                  <span className="absolute top-0 left-0 w-full h-0.5 bg-red-500 transform scale-x-0 transition-transform group-hover:scale-x-100"></span>
-                </a>
+                {/* Contact Us Button - Desktop */}
+                <Link href="/contact-us">
+                  <BorderButton2 className="hidden lg:block">
+                    Contact Us
+                  </BorderButton2>
+                </Link>
               </div>
-
-              {/* Contact Us Button - Desktop */}
-              <Link href="/contact-us">
-                <BorderButton2 className="hidden lg:block">
-                  Contact Us
-                </BorderButton2>
-              </Link>
             </div>
 
-            {/* Mobile Menu */}
-            {isMobileMenuOpen && (
-              <div className="lg:hidden mt-4">
-                <div className="flex flex-col space-y-4">
-                  <a
-                    href="/"
-                    className="text-red-600 font-bold text-md uppercase tracking-wider px-4 py-2"
-                  >
-                    HOME
-                  </a>
-                  <a
-                    href="/about-us"
-                    className="text-gray-600 font-bold text-md uppercase tracking-wider px-4 py-2"
-                  >
-                    ABOUT US
-                  </a>
+            {/* Mobile Menu - Slide down animation */}
+            <div
+              className={`lg:hidden transition-all duration-300 ease-in-out ${
+                isMobileMenuOpen
+                  ? "max-h-screen opacity-100 visible"
+                  : "max-h-0 opacity-0 invisible"
+              }`}
+            >
+              <div className="flex flex-col space-y-2 mt-4 bg-gray-50 rounded-lg p-4">
+                <a
+                  href="/"
+                  className="text-red-600 font-bold text-md uppercase tracking-wider px-4 py-2 hover:bg-gray-100 rounded-md transition-colors duration-200"
+                >
+                  HOME
+                </a>
+                <a
+                  href="/about-us"
+                  className="text-gray-600 font-bold text-md uppercase tracking-wider px-4 py-2 hover:bg-gray-100 rounded-md transition-colors duration-200"
+                >
+                  ABOUT US
+                </a>
 
-                  {/* Mobile Accordion for Visa Options */}
-                  <div className="space-y-2">
-                    <button
-                      onClick={() => setVisaOptionsOpen(!isVisaOptionsOpen)}
-                      className="w-full text-left text-gray-600 font-bold text-md uppercase tracking-wider px-4 py-2"
-                    >
-                      VISA OPTIONS
-                    </button>
-                    {isVisaOptionsOpen && (
-                      <div className="pl-8 space-y-2">
-                        {visaOptions.map((option, index) => (
-                          <a
-                            key={index}
-                            href={`/visa-options/${option
-                              .toLowerCase()
-                              .replace(/\s+/g, "-")}`}
-                            className="block text-sm text-gray-600"
-                          >
-                            {option}
-                          </a>
-                        ))}
-                      </div>
-                    )}
+                {/* Mobile Accordions with smooth transitions */}
+                <div className="space-y-2">
+                  <button
+                    onClick={() => setVisaOptionsOpen(!isVisaOptionsOpen)}
+                    className="w-full flex justify-between items-center text-left text-gray-600 font-bold text-md uppercase tracking-wider px-4 py-2 hover:bg-gray-100 rounded-md transition-colors duration-200"
+                  >
+                    <span>VISA OPTIONS</span>
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform duration-200 ${
+                        isVisaOptionsOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  <div
+                    className={`transition-all duration-200 ${
+                      isVisaOptionsOpen ? "max-h-96" : "max-h-0 overflow-hidden"
+                    }`}
+                  >
+                    {visaOptions.map((option, index) => (
+                      <a
+                        key={index}
+                        href={`/visa-options/${option
+                          .toLowerCase()
+                          .replace(/\s+/g, "-")}`}
+                        className="block text-sm text-gray-600 hover:text-red-500 px-6 py-2 hover:bg-gray-100 transition-colors duration-200"
+                      >
+                        {option}
+                      </a>
+                    ))}
                   </div>
+                </div>
 
-                  {/* Mobile Accordion for Visa Info Links */}
-                  <div className="space-y-2">
-                    <button
-                      onClick={() => setVisaInfoOpen(!isVisaInfoOpen)}
-                      className="w-full text-left text-gray-600 font-bold text-md uppercase tracking-wider px-4 py-2"
-                    >
-                      VISA INFO LINKS
-                    </button>
-                    {isVisaInfoOpen && (
-                      <div className="pl-8 space-y-2">
-                        {visaInfoLinks.map((link, index) => (
-                          <a
-                            key={index}
-                            href={`/visa-info/${link
-                              .toLowerCase()
-                              .replace(/\s+/g, "-")}`}
-                            className="block text-sm text-gray-600"
-                          >
-                            {link}
-                          </a>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                <a
+                  href="/service-fees"
+                  className="text-gray-600 font-bold text-md uppercase tracking-wider px-4 py-2 hover:bg-gray-100 rounded-md transition-colors duration-200"
+                >
+                  SERVICE FEES
+                </a>
+                <a
+                  href="/news"
+                  className="text-gray-600 font-bold text-md uppercase tracking-wider px-4 py-2 hover:bg-gray-100 rounded-md transition-colors duration-200"
+                >
+                  NEWS
+                </a>
 
-                  <a
-                    href="/service-fees"
-                    className="text-gray-600 font-bold text-md uppercase tracking-wider px-4 py-2"
-                  >
-                    SERVICE FEES
-                  </a>
-                  <a
-                    href="/news"
-                    className="text-gray-600 font-bold text-md uppercase tracking-wider px-4 py-2"
-                  >
-                    NEWS
-                  </a>
-
-                  {/* Contact Us Button - Mobile */}
-                  <button className="bg-gradient-to-r from-red-500 to-red-600 text-white font-bold px-6 py-2 mx-4 rounded hover:from-red-600 hover:to-red-700 transition-all duration-300">
+                {/* Contact Us Button - Mobile */}
+                <Link href="/contact-us">
+                  <button className="w-full bg-gradient-to-r from-red-500 to-red-600 text-white font-bold px-6 py-3 rounded-md hover:from-red-600 hover:to-red-700 transition-all duration-300 mt-2">
                     Contact Us
                   </button>
-                </div>
+                </Link>
               </div>
-            )}
+            </div>
           </div>
         </nav>
       </header>

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Plane } from "lucide-react";
+import { Plane, ChevronDown } from "lucide-react";
 import GradientButtonPrimary from "@/components/constants/GradientButtonPrimary";
 import GradientButton from "../constants/BorderButton";
 
@@ -9,18 +9,25 @@ const Hero = () => {
   const [planePosition, setPlanePosition] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
 
-  // Check for mobile device
+  // Check for mobile device with debouncing
   useEffect(() => {
+    let timeoutId;
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setIsMobile(window.innerWidth < 768);
+      }, 150);
     };
 
     checkMobile();
     window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
-  // Mouse movement effect - only on desktop
+  // Enhanced mouse movement effect
   useEffect(() => {
     if (isMobile) return;
 
@@ -33,41 +40,52 @@ const Hero = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [isMobile]);
 
-  // Smooth plane animation - only on desktop
+  // Smooth plane animation with improved performance
   useEffect(() => {
     if (isMobile) return;
 
+    let animationFrameId;
     const updatePlanePosition = () => {
       setPlanePosition((prev) => ({
-        x: prev.x + (mousePosition.x - prev.x) * 0.1,
-        y: prev.y + (mousePosition.y - prev.y) * 0.1,
+        x: prev.x + (mousePosition.x - prev.x) * 0.08,
+        y: prev.y + (mousePosition.y - prev.y) * 0.08,
       }));
+      animationFrameId = requestAnimationFrame(updatePlanePosition);
     };
 
-    const animationFrame = requestAnimationFrame(updatePlanePosition);
-    return () => cancelAnimationFrame(animationFrame);
+    animationFrameId = requestAnimationFrame(updatePlanePosition);
+    return () => cancelAnimationFrame(animationFrameId);
   }, [mousePosition, isMobile]);
 
   return (
     <div className="relative min-h-[100svh] bg-gray-100 overflow-hidden">
-      {/* Background Image Container */}
+      {/* Background Image with Optimized Loading */}
       <div className="absolute inset-0">
         <div className="relative w-full h-full">
-          <img
-            src="/images/hero-bg.webp"
-            alt="Immigration Consulting"
-            className="object-cover w-full h-full"
-            loading="eager"
+          <picture>
+            <source srcSet="/images/hero-bg.webp" type="image/webp" />
+            <source srcSet="/images/hero-bg.jpg" type="image/jpeg" />
+            <img
+              src="/images/hero-bg.jpg"
+              alt="Immigration Consulting Background"
+              className="object-cover w-full h-full"
+              loading="eager"
+              fetchPriority="high"
+            />
+          </picture>
+          {/* Responsive Gradient Overlay */}
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-red-600/90 via-red-600/75 to-transparent 
+            sm:from-red-600/85 sm:via-red-600/70 sm:to-transparent 
+            lg:from-red-600/80 lg:via-red-600/60 lg:to-transparent"
           />
-          {/* Red Overlay - Adjusted for better mobile visibility */}
-          <div className="absolute inset-0 bg-gradient-to-r from-red-600/90 via-red-600/70 to-transparent sm:from-red-600/80 sm:via-red-600/60" />
         </div>
       </div>
 
-      {/* Animated Plane - Hidden on mobile */}
+      {/* Animated Plane with Enhanced Performance */}
       {!isMobile && (
         <div
-          className="absolute hidden md:block pointer-events-none transition-transform duration-100 ease-out"
+          className="absolute hidden md:block pointer-events-none transition-transform duration-75 ease-out will-change-transform"
           style={{
             transform: `translate(${planePosition.x}px, ${
               planePosition.y
@@ -86,43 +104,56 @@ const Hero = () => {
         </div>
       )}
 
-      {/* Content */}
+      {/* Main Content */}
       <div className="relative h-full flex flex-col justify-center">
-        <div className="container mx-auto px-4 py-12 md:py-16 lg:py-24">
-          {/* Category Tag */}
-          <div className="inline-block bg-customGray backdrop-blur-sm text-white px-4 sm:px-6 py-1 sm:py-2 mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base">
+        <div className="container mx-auto px-4 py-8 sm:py-12 md:py-16 lg:py-24">
+          {/* Responsive Category Tag */}
+          <div
+            className="inline-block bg-customGray backdrop-blur-sm text-white 
+            px-3 py-1 sm:px-4 sm:py-1.5 md:px-6 md:py-2 
+            mb-4 sm:mb-6 md:mb-8 
+            text-xs sm:text-sm md:text-base"
+          >
             Immigration Services Provider
           </div>
 
-          {/* Main Heading */}
-          <div className="max-w-4xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-white leading-tight mb-6 sm:mb-8">
-              Total Migration & Enterprises Limited
+          {/* Responsive Main Heading */}
+          <div className="max-w-4xl space-y-6">
+            <h1
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 
+              font-serif text-white leading-tight 
+              tracking-tight sm:tracking-normal"
+            >
+              Total Migration &<br className="hidden sm:block" /> Enterprises
+              Limited
             </h1>
 
-            {/* CTA Button */}
-            <GradientButton className="font-bold text-md">
-            Visa Options
-          </GradientButton>
+            {/* Subtitle - New Addition */}
+            <h6
+              className="text-white/90 text-sm sm:text-base md:text-lg lg:text-2xl 
+              max-w-lg leading-relaxed"
+            >
+              Your trusted partner in immigration services, providing expert
+              guidance for your journey to New Zealand.
+            </h6>
+
+            {/* CTA Buttons with Responsive Spacing */}
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-8">
+              <GradientButtonPrimary className="w-full sm:w-auto text-sm sm:text-base font-bold">
+                Explore Visa Options
+              </GradientButtonPrimary>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator - Hidden on smaller screens */}
-      <div className="hidden md:block absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <svg
-          className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 14l-7 7m0 0l-7-7m7 7V3"
-          />
-        </svg>
+      {/* Enhanced Scroll Indicator */}
+      <div
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 
+        flex flex-col items-center gap-2 text-white/90 animate-pulse"
+      >
+        <span className="text-sm hidden sm:block">Scroll to explore</span>
+        <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 animate-bounce" />
       </div>
     </div>
   );
