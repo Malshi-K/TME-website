@@ -2,9 +2,9 @@
 export const visaServices = [
   {
     id: "residence-visa",
-    title: "Residence Visa",
+    title: "New Zealand Residence Visa",
     description: {
-      image: "/images/visa-services/service-1.jpg",
+      image: "/images/visa-options/1.png",
       content: [
         {
           text: "The objective of New Zealand’s residence programme is to contribute to economic growth through enhancing the overall level of human capability in New Zealand, encouraging enterprise and innovation, and fostering international links, while maintaining a high level of social cohesion.",
@@ -47,11 +47,11 @@ export const visaServices = [
       },
       {
         title: "Residence from Work Category",
-        image: "/images/visa-services/service-4.jpg",
+        image: "/images/visa-services/service-5.webp",
       },
       {
         title: "Skilled Migrant Category",
-        image: "/images/visa-services/service-4.jpg",
+        image: "/images/visa-services/service-6.jpg",
       },
     ],
   },
@@ -59,7 +59,7 @@ export const visaServices = [
     id: "work-visa",
     title: "New Zealand Work Visa",
     description: {
-      image: "/images/visa-services/service-1.jpg",
+      image: "/images/visa-options/2.png",
       content: [
         {
           text: "The objective of work visa instructions is to contribute to developing New Zealand's human capability base.",
@@ -90,55 +90,55 @@ export const visaServices = [
     categories: [
       {
         title: "Post-Study work visa",
-        image: "/images/visa-services/work-1.jpg",
+        image: "/images/visa-services/service-1.jpg",
         content:
           "For international graduates from New Zealand educational institutions who have completed their studies.",
       },
       {
         title: "Student and trainee work visa",
-        image: "/images/visa-services/work-2.jpg",
+        image: "/images/visa-services/service-2.jpg",
         content:
           "For current students and trainees looking to gain work experience during their studies in New Zealand.",
       },
       {
         title: "Family stream work visa",
-        image: "/images/visa-services/work-3.jpg",
+        image: "/images/visa-services/service-3.jpg",
         content:
           "For partners of New Zealand citizens, residence class visa holders, work visa holders, and student visa holders.",
       },
       {
         title: "Horticulture and viticulture seasonal work visa",
-        image: "/images/visa-services/work-4.jpg",
+        image: "/images/visa-services/service-4.jpg",
         content:
           "Including Recognised Seasonal Employer (RSE), Working Holidaymaker Extension, and Supplementary Seasonal Employment (SSE).",
       },
       {
         title: "Foreign crew of fishing vessels",
-        image: "/images/visa-services/work-5.jpg",
+        image: "/images/visa-services/service-5.webp",
         content:
           "For foreign crew members working on fishing vessels in New Zealand waters.",
       },
       {
         title: "Religious Worker",
-        image: "/images/visa-services/work-6.jpg",
+        image: "/images/visa-services/service-6.jpg",
         content:
           "For religious workers coming to New Zealand to carry out religious work.",
       },
       {
         title: "Essential Skills work visa",
-        image: "/images/visa-services/work-7.jpg",
+        image: "/images/visa-services/service-7.jpg",
         content:
           "For those with job offers in occupations on the skills shortage lists.",
       },
       {
         title: "International/Humanitarian work visa",
-        image: "/images/visa-services/work-8.jpg",
+        image: "/images/visa-services/service-8.jpg",
         content:
           "Including working holiday schemes, Antarctic Treaty personnel, diplomatic staff, and special work visas for various international arrangements.",
       },
       {
         title: "Work to Residence",
-        image: "/images/visa-services/work-9.jpg",
+        image: "/images/visa-services/service-9.jpg",
         content:
           "Including Talent (Accredited Employers) Work, Talent (Arts, Culture and Sports), Long Term Skill Shortage List work, and more.",
       },
@@ -148,7 +148,7 @@ export const visaServices = [
     id: "student-visa",
     title: "New Zealand Student Visa",
     description: {
-      image: "/images/visa-services/service-1.jpg",
+      image: "/images/visa-options/3.png",
       content: [
         {
           text: "The purpose of New Zealand’s student instructions is to contribute to New Zealand’s sustainable economic development by:",
@@ -167,18 +167,18 @@ export const visaServices = [
     categories: [
       {
         title: "Fee Paying Student Visa",
-        image: "/images/categories/fee-paying.jpg",
+        image: "/images/visa-services/service-1.jpg",
         content:
           "For international students enrolled in approved educational institutions.",
       },
       {
         title: "Exchange Student Visa",
-        image: "/images/categories/exchange.jpg",
+        image: "/images/visa-services/service-2.jpg",
         content: "For students participating in approved exchange programs.",
       },
       {
         title: "Pathway Student Visa",
-        image: "/images/categories/pathway.jpg",
+        image: "/images/visa-services/service-3.jpg",
         content: "For students planning to study multiple courses.",
       },
     ],
@@ -187,7 +187,7 @@ export const visaServices = [
     id: "visitor-visa",
     title: "New Zealand Visitor Visa",
     description: {
-      image: "/images/visa-services/service-1.jpg",
+      image: "/images/visa-options/4.png",
       content: [
         {
           text: "The objective of visitor visa instructions is to facilitate the movement of visitors to New Zealand while minimising the risks to New Zealand, and in particular;",
@@ -214,17 +214,17 @@ export const visaServices = [
     categories: [
       {
         title: "Tourist Visa",
-        image: "/images/categories/tourist.jpg",
+        image: "/images/visa-services/service-1.jpg",
         content: "For holiday and recreational visits to New Zealand.",
       },
       {
         title: "Business Visitor Visa",
-        image: "/images/categories/business-visitor.jpg",
+        image: "/images/visa-services/service-2.jpg",
         content: "For short-term business activities and meetings.",
       },
       {
         title: "Family Visit Visa",
-        image: "/images/categories/family-visit.jpg",
+        image: "/images/visa-services/service-3.jpg",
         content: "For visiting family members in New Zealand.",
       },
     ],
@@ -233,7 +233,7 @@ export const visaServices = [
     id: "investor-visa",
     title: "New Zealand Investor Visa",
     description: {
-      image: "/images/visa-services/service-1.jpg",
+      image: "/images/visa-options/5.png",
       content: [
         {
           text: "The objective of work visa instructions is to contribute to developing New Zealand's human capability base.",
@@ -264,18 +264,18 @@ export const visaServices = [
     categories: [
       {
         title: "Investor 1 Category",
-        image: "/images/categories/investor1.jpg",
+        image: "/images/visa-services/service-1.jpg",
         content:
           "For high-value investors willing to invest NZD 10 million or more.",
       },
       {
         title: "Investor 2 Category",
-        image: "/images/categories/investor2.jpg",
+        image: "/images/visa-services/service-2.jpg",
         content: "For experienced investors with NZD 3 million to invest.",
       },
       {
         title: "Business Investment",
-        image: "/images/categories/business-investment.jpg",
+        image: "/images/visa-services/service-3.jpg",
         content:
           "For active investors looking to establish or purchase businesses.",
       },

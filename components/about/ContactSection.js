@@ -24,7 +24,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="bg-customGray min-h-screen py-16">
+    <section className="bg-customGray min-h-screen py-16 mb-6">
       <div className="container mx-auto px-20">
         <div className="flex flex-col lg:flex-row gap-2">
           {/* Left Side - Contact Info */}
